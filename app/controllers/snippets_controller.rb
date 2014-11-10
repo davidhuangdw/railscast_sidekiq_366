@@ -37,7 +37,8 @@ class SnippetsController < ApplicationController
 
     respond_to do |format|
       if @snippet.save
-        @snippet.generate_highlight_code
+        # @snippet.generate_highlight_code
+        PygmentsWorker.perform_async(@snippet.id)
         format.html { redirect_to @snippet, notice: 'Snippet was successfully created.' }
         format.json { render json: @snippet, status: :created }
       else
