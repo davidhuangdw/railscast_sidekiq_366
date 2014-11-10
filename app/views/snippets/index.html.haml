@@ -1,0 +1,8 @@
+.page-header
+  = link_to new_snippet_path, :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    New Snippet
+  %h1 Listing snippets
+
+= render @snippets
+

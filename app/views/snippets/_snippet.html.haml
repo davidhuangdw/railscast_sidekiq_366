@@ -1,0 +1,8 @@
+%h3=link_to snippet.name, snippet_path(snippet)
+%p
+  = snippet.language
+  = time_ago_in_words(snippet.updated_at)+" ago"
+  = link_to 'Show', snippet
+  = link_to 'Edit', edit_snippet_path(snippet)
+  = link_to 'Destroy', snippet, :data => { confirm: 'Are you sure?' }, :method => :delete
+%td= snippet.code
