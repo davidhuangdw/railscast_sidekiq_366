@@ -37,6 +37,7 @@ class SnippetsController < ApplicationController
 
     respond_to do |format|
       if @snippet.save
+        @snippet.generate_highlight_code
         format.html { redirect_to @snippet, notice: 'Snippet was successfully created.' }
         format.json { render json: @snippet, status: :created }
       else
