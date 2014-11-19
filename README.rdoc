@@ -1,28 +1,27 @@
-== README
+### sidekiq
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+        # monitor
+        gem 'sinatra', require:false
+        gem 'slim'
+        # routes:
+        require 'sidekiq/web'
+        ..
+          mount Sidekiq::Web, at:'/sidekiq'
 
-Things you may want to cover:
+        # add job:
+            PygmentsWorker.perform_async(@snippet.id)
 
-* Ruby version
+        # run worker:
+        bundle exec sidekiq
 
-* System dependencies
+        # add worker:
+        # app/workers/...rb
+        class PygmentsWorker
+          include Sidekiq::Worker
+          def perform(snippet_id)
+            Snippet.find(snippet_id).generate_highlight_code
+          end
+        end
 
-* Configuration
+        gem 'sidekiq'
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
